@@ -1,0 +1,62 @@
+version: "2.3"
+services:
+  # jellyfin:
+  #   image: linuxserver/jellyfin
+  #   container_name: jellyfin
+  #   networks:
+  #     - media_network
+  #   environment:
+  #     - PUID=1000
+  #     - PGID=1000
+  #     - TZ=Europe/Moscow
+  #   volumes:
+  #     - C:\Users\ilya\Documents\projects\kodi\data\programdata:/config
+  #     - C:\Users\ilya\Documents\projects\kodi\data\tvshows:/data/tvshows
+  #     - C:\Users\ilya\Documents\projects\kodi\data\movies:/data/movies
+  #     - C:\Users\ilya\Documents\projects\kodi\data\lib:/opt/vc/lib #optional
+  #   ports:
+  #     - 8096:8096
+  #     - 8920:8920 #optional
+  #     - 7359:7359/udp #optional
+  #     - 1900:1900/udp #optional
+  #   restart: unless-stopped
+  # xteve:
+  #   image: dnsforge/xteve
+  #   container_name: xteve  
+  #   networks:
+  #     - media_network
+  #   volumes:
+  #     - C:\Users\ilya\Documents\projects\kodi\data\xteve:/home/xteve/conf
+  #     - C:\Users\ilya\Documents\projects\kodi\data\guide2go:/home/xteve/guide2go/conf  
+  #   ports:
+  #     - 34400:34400
+  #   restart: always
+  telly:
+    image: tellytv:3
+    container_name: tellytv
+    networks:
+      - media_network
+    volumes:
+      - ./data/tellytv:/home/telly
+    ports:
+      - "6077:6077"
+    restart: always
+  # plex:
+  #   image: linuxserver/plex
+  #   container_name: plex
+  #   networks:
+  #     - media_network
+  #   environment:
+  #     - PUID=1000
+  #     - PGID=1000
+  #     - VERSION=docker
+  #   ports:
+  #     - 32400:32400
+  #   volumes:
+  #     - .\data\plexdata:/config
+  #     - .\data\tvshows:/tv
+  #     - .\data\movies:/movies
+  #   restart: always
+networks:
+  media_network:
+    driver: bridge
