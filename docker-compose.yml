@@ -32,12 +32,13 @@ services:
   #     - 34400:34400
   #   restart: always
   telly:
-    image: tellytv:3
+    build: docker/
     container_name: tellytv
     networks:
       - media_network
     volumes:
-      - ./data/tellytv:/home/telly
+      - .\data\tellytv:/home/telly
+    command: sh -c "cd /home/telly && ./telly"
     ports:
       - "6077:6077"
     restart: always
